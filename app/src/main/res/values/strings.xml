@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Project1</string>
+    <string name="app_name"> Project1</string>
+    <string name="helloworld"> Hello every body ! </string>
+    <string name="name"> User Name </string>
+    <string name="password"> Password </string>
+    <string name="login"> LogIn </string>
 </resources>
