@@ -4,4 +4,7 @@
     <string name="name"> User Name </string>
     <string name="password"> Password </string>
     <string name="login"> LogIn </string>
+    <string name="sologan">Hello ! Welcome language Adroi ! </string>
+    <string name="button_click">Click me!</string>
+    <string name="button_hihi">Hi hi Do ngoc! </string>
 </resources>
