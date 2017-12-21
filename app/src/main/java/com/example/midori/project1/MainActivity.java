@@ -11,15 +11,77 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayoutRoot;
+    private RelativeLayout relativeLayoutRoot;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initRelativeLayout();
+        setContentView(relativeLayoutRoot);
+    }
 
+    private void initRelativeLayout() {
+        //RelativeLayout Root
+        relativeLayoutRoot = new RelativeLayout(this);
+        RelativeLayout.LayoutParams relativeLayoutParam = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        relativeLayoutRoot.setLayoutParams(relativeLayoutParam);
+
+        //RelativeLayout sub
+        RelativeLayout relativeLayoutSub = new RelativeLayout(this);
+        RelativeLayout.LayoutParams relativeLayoutParamSub = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        relativeLayoutSub.setLayoutParams(relativeLayoutParamSub);
+        relativeLayoutSub.setGravity(Gravity.CENTER);
+        relativeLayoutSub.setId(R.id.rl);
+
+
+        //ImageLayout
+        ImageView imgView = new ImageView(this);
+        imgView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        imgView.setId(R.id.imgAvatar);
+        imgView.setImageResource(R.mipmap.ic_launcher);
+
+        //Text View
+        TextView textView = new TextView(this);
+        RelativeLayout.LayoutParams textViewParam = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        textViewParam.addRule(RelativeLayout.CENTER_VERTICAL);
+        textViewParam.addRule(RelativeLayout.RIGHT_OF,imgView.getId());
+        textView.setLayoutParams(textViewParam);
+        textView.setText("Hello ! This is my app! ");
+        textView.setGravity(Gravity.CENTER);
+
+        relativeLayoutSub.addView(imgView);
+        relativeLayoutSub.addView(textView);
+
+        //Button on click
+        Button btnClick = new Button(this);
+        RelativeLayout.LayoutParams btnClickParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        btnClickParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        btnClickParam.addRule(RelativeLayout.BELOW, relativeLayoutSub.getId());
+        btnClick.setLayoutParams(btnClickParam);
+        btnClick.setId(R.id.btnOnClick);
+        btnClick.setText("On click! ");
+
+        //Button Hihi
+        Button btnHihi = new Button(this);
+        RelativeLayout.LayoutParams btnHihiParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        btnHihiParam.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        btnHihiParam.addRule(RelativeLayout.BELOW, btnClick.getId());
+        btnHihi.setLayoutParams(btnHihiParam);
+        btnHihi.setText("Hi Hi !!! ");
+
+        relativeLayoutRoot.addView(relativeLayoutSub);
+        relativeLayoutRoot.addView(btnClick);
+        relativeLayoutRoot.addView(btnHihi);
+    }
+
+    private void initLinearLayout() {
         //Linear Layout Root
         linearLayoutRoot = new LinearLayout(this);
         LinearLayout.LayoutParams linearLayoutParamsRoot = new LinearLayout.LayoutParams
@@ -30,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //Linear Layout Second
         LinearLayout linearLayoutSecond = new LinearLayout(this);
         LinearLayout.LayoutParams linearLayoutParamSecond = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         linearLayoutSecond.setGravity(Gravity.CENTER);
         linearLayoutSecond.setLayoutParams(linearLayoutParamSecond);
         linearLayoutSecond.setOrientation(LinearLayout.HORIZONTAL);
@@ -65,6 +127,5 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutRoot.addView(linearLayoutSecond);
         linearLayoutRoot.addView(btnClick);
         linearLayoutRoot.addView(btnhihi);
-        setContentView(linearLayoutRoot);
     }
 }
