@@ -1,62 +1,70 @@
 package com.example.midori.project1;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private final String TAG=getClass().getSimpleName();
-    private Button btnLogin;
+    private LinearLayout linearLayoutRoot;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
-        setContentView(R.layout.activity_main);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DialogActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
-    @Override
-    protected  void onStart(){
-        super.onStart();
-        Log.d(TAG,"On Start");
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
+        //Linear Layout Root
+        linearLayoutRoot = new LinearLayout(this);
+        LinearLayout.LayoutParams linearLayoutParamsRoot = new LinearLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        linearLayoutRoot.setOrientation(LinearLayout.VERTICAL);
+        linearLayoutRoot.setLayoutParams(linearLayoutParamsRoot);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
+        //Linear Layout Second
+        LinearLayout linearLayoutSecond = new LinearLayout(this);
+        LinearLayout.LayoutParams linearLayoutParamSecond = new LinearLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+        linearLayoutSecond.setGravity(Gravity.CENTER);
+        linearLayoutSecond.setLayoutParams(linearLayoutParamSecond);
+        linearLayoutSecond.setOrientation(LinearLayout.HORIZONTAL);
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart: ");
-    }
+        //Image View
+        ImageView imgView = new ImageView(this);
+        imgView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        imgView.setImageResource(R.mipmap.ic_launcher);
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
+        //Text view
+        TextView textView = new TextView(this);
+        textView.setText("This is my app ! WeLl come");
+        LinearLayout.LayoutParams lay = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lay.gravity = Gravity.CENTER;
+        textView.setLayoutParams(lay);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
+        linearLayoutSecond.addView(imgView);
+        linearLayoutSecond.addView(textView);
+
+        //Button Click me
+        Button btnClick = new Button(this);
+        LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        btnParams.gravity = Gravity.CENTER;
+        btnClick.setLayoutParams(btnParams);
+        btnClick.setText("On Click !!");
+
+        //Button hihi me
+        Button btnhihi = new Button(this);
+        btnhihi.setLayoutParams(btnParams);
+        btnhihi.setText("On Click !!");
+
+        linearLayoutRoot.addView(linearLayoutSecond);
+        linearLayoutRoot.addView(btnClick);
+        linearLayoutRoot.addView(btnhihi);
+        setContentView(linearLayoutRoot);
     }
 }
