@@ -7,22 +7,48 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayoutRoot;
     private RelativeLayout relativeLayoutRoot;
 
+    private Button btn_result;
+    private EditText edt_numbera;
+    private EditText edt_numberb;
+    private int numbera, numberb;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initRelativeLayout();
-        setContentView(relativeLayoutRoot);
+        setContentView(R.layout.activity_main);
+        edt_numbera = (EditText) findViewById(R.id.edta);
+        edt_numberb = (EditText) findViewById(R.id.edtb);
+        btn_result = (Button) findViewById(R.id.btn_result);
+
+        btn_result.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String stra = edt_numbera.getText().toString();
+                String strb = edt_numberb.getText().toString();
+                if (stra.isEmpty() || strb.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Input number!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                numbera = Integer.parseInt(stra);
+                numberb = Integer.parseInt(strb);
+                Toast.makeText(MainActivity.this, String.format("%s + %s = %s", numbera,numberb,numbera+numberb), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initRelativeLayout() {
@@ -51,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout.LayoutParams textViewParam = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textViewParam.addRule(RelativeLayout.CENTER_VERTICAL);
-        textViewParam.addRule(RelativeLayout.RIGHT_OF,imgView.getId());
+        textViewParam.addRule(RelativeLayout.RIGHT_OF, imgView.getId());
         textView.setLayoutParams(textViewParam);
         textView.setText("Hello ! This is my app! ");
         textView.setGravity(Gravity.CENTER);

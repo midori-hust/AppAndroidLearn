@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.midori.project1.MainActivity">
+    android:orientation="vertical">
 
-    <EditText
+    <LinearLayout
+        android:weightSum="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:textColor="@color/colorBlue"
-        android:textSize="@dimen/font_size"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="7dp" />
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <EditText
+            android:hint="A"
+            android:inputType="number"
+            android:id="@+id/edta"
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:hint="B"
+            android:inputType="number"
+            android:id="@+id/edtb"
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textColor="@color/colorBlue"
-        android:textSize="@dimen/font_size"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="76dp" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_result"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="132dp" />
+        android:text="@string/aaddb" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
