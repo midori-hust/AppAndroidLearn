@@ -7,4 +7,11 @@
     <string name="sologan">Hello ! Welcome language Adroi ! </string>
     <string name="button_click">Click me!</string>
     <string name="button_hihi">Hi hi Do ngoc! </string>
+
+    <string name="facebook_sologan"> facebook </string>
+    <string name="facebook_forgotPass">Forgot Password ?</string>
+    <string name="facebook_signup">Sign Up for Facebook </string>
+    <string name="email">Input Email </string>
+    <string name="pass">Input Password </string>
+
 </resources>
