@@ -49,7 +49,7 @@ public class CalculatorController {
         return result;
     }
 
-    protected List<String> convertStringToList(String mathExpression) {
+    List<String> convertStringToList(String mathExpression) {
         int previous = 0;
         List<String> result = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class CalculatorController {
     }
 
     // List contains operation(+,-,*,/) to List contains operation(+,-)
-    public List<String> handleOperationMultiplicationAndDivisionOnList(List<String> mathExpressionList) {
+    List<String> handleOperationMultiplicationAndDivisionOnList(List<String> mathExpressionList) {
         Queue<String> queue = new LinkedList<>(mathExpressionList);
         Stack<String> stack = new Stack<>();
         for (; ; ) {
@@ -93,7 +93,7 @@ public class CalculatorController {
     }
 
     //List contains operation(+,-) to result
-    public String handleOperation(List<String> mathExpressionList) {
+    String handleOperation(List<String> mathExpressionList) {
         Queue<String> queue = new LinkedList<>(mathExpressionList);
         Stack<Double> stack = new Stack<>();
         for (; ; ) {
