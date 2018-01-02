@@ -1,39 +1,37 @@
 package com.example.midori.project1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by midori on 2017/12/28.
  */
-
 public class CalculatorController {
-    private String mathExpression;
-    public String result;
+    private String result;
 
     public boolean invalidStringMathExpression(String mathExpression) {
         boolean isConsequenceOfOperator = false;
         for (int i = 0; i < mathExpression.length(); i++) {
             if (i == mathExpression.length() - 1 || i == 0) {
-                if(isOperator(mathExpression.charAt(i))) {
+                if (isOperator(mathExpression.charAt(i))) {
                     return false;
                 }
             }
-            if (isOperator(mathExpression.charAt(i))) {
-                if (isConsequenceOfOperator) {
-                    return false;
-                }
-                isConsequenceOfOperator = true;
+            if (!isOperator(mathExpression.charAt(i))) {
+                isConsequenceOfOperator = false;
                 continue;
             }
-            isConsequenceOfOperator = false;
+
+            if (isConsequenceOfOperator) {
+                return false;
+            }
+            isConsequenceOfOperator = true;
         }
-        setMathExpression(mathExpression);
-        setResult();
+        setResult(mathExpression);
         return true;
     }
 
@@ -41,93 +39,80 @@ public class CalculatorController {
         return Arrays.asList('+', '-', '*', '/').contains(character);
     }
 
-    private void setMathExpression(String mathExpression){
-        this.mathExpression = mathExpression;
-    }
-
-    public String getMathExpression(){
-        return mathExpression;
-    }
-
-    private void setResult(){
+    private void setResult(String mathExpression) {
         this.result = handleOperation(
                 handleOperationMultiplicationAndDivisionOnList(
                         convertStringToList(mathExpression)));
     }
 
-    public String getResult(){
+    public String getResult() {
         return result;
     }
 
-    public List<String> convertStringToList(String mathExpression) {
-        int previous = 0, current;
-        char currentChar;
+    List<String> convertStringToList(String mathExpression) {
+        int previous = 0;
         List<String> result = new ArrayList<>();
 
-        for (current = 0; current < mathExpression.length(); current++) {
-            currentChar = mathExpression.charAt(current);
-            if (Arrays.asList('+', '-', '*', '/').contains(currentChar)) {
-                if (previous < current) result.add(mathExpression.substring(previous, current));
-                result.add(currentChar + "");
-                previous = current + 1;
+        for (int i = 0; i < mathExpression.length(); i++) {
+            char currentChar = mathExpression.charAt(i);
+            if (isOperator(currentChar)) {
+                if (previous < i) {
+                    result.add(mathExpression.substring(previous, i));
+                }
+                result.add(String.valueOf(currentChar));
+                previous = i + 1;
             }
         }
-        if (previous < current) {
-            result.add(mathExpression.substring(previous, current));
+        if (previous < mathExpression.length() - 1) {
+            result.add(mathExpression.substring(previous, mathExpression.length()));
         }
         return result;
     }
 
-    //List contains operation(+,-,*,/) to List contains operation(+,-)
-    public List<String> handleOperationMultiplicationAndDivisionOnList(List<String> mathExpressionList) {
-        double temp = 0;
-        String current, next, pre = "";
+    // List contains operation(+,-,*,/) to List contains operation(+,-)
+    List<String> handleOperationMultiplicationAndDivisionOnList(List<String> mathExpressionList) {
+        Queue<String> queue = new LinkedList<>(mathExpressionList);
+        Stack<String> stack = new Stack<>();
+        for (; ; ) {
+            if (queue.isEmpty()) {
+                break;
+            }
 
-        for (ListIterator<String> mathExpressionIterator = mathExpressionList.listIterator(); mathExpressionIterator.hasNext(); ) {
-
-            if (mathExpressionIterator.nextIndex() == 0) {
-                pre = String.valueOf(mathExpressionIterator.next());
+            String str = queue.poll();
+            if (str.equals("*")) {
+                stack.push(String.valueOf(Double.parseDouble(stack.pop()) * Double.parseDouble(queue.poll())));
                 continue;
             }
-            current = String.valueOf(mathExpressionIterator.next());
-
-            if (Arrays.asList("*", "/").contains(current)) {
-                if (!mathExpressionIterator.hasNext()) break;
-                if (current.equals("*")) {
-                    temp = Double.parseDouble(pre) * Double.parseDouble(String.valueOf(mathExpressionIterator.next()));
-                }
-                if (current.equals("/")) {
-                    temp = Double.parseDouble(pre) / Double.parseDouble(String.valueOf(mathExpressionIterator.next()));
-                }
-                mathExpressionIterator.previous();
-                mathExpressionIterator.set(temp + "");
-                mathExpressionIterator.previous();
-                mathExpressionIterator.remove();
-                mathExpressionIterator.previous();
-                mathExpressionIterator.remove();
+            if (str.equals("/")) {
+                stack.push(String.valueOf(Double.parseDouble(stack.pop()) / Double.parseDouble(queue.poll())));
+                continue;
             }
-            pre = String.valueOf(current);
+            stack.push(str);
         }
-        return mathExpressionList;
+        return new ArrayList<>(stack);
     }
 
     //List contains operation(+,-) to result
-    public String handleOperation(List<String> mathExpressionList){
-        double result=0d;
-        int flag=0;
-        String temp;
-        for (Iterator<String> iterator = mathExpressionList.iterator();iterator.hasNext();) {
-            temp = iterator.next().toString();
-            if (flag == 0) {
-                result = Double.parseDouble(temp);
-                flag++;
+    String handleOperation(List<String> mathExpressionList) {
+        Queue<String> queue = new LinkedList<>(mathExpressionList);
+        Stack<Double> stack = new Stack<>();
+        for (; ; ) {
+            if (queue.isEmpty()) {
+                break;
             }
-            if (Arrays.asList("+","-").contains(temp)) {
-                if (!iterator.hasNext()) return null;
-                if (temp.equals("+")) result = result + Double.parseDouble((iterator.next()).toString());
-                if (temp.equals("-")) result = result - Double.parseDouble((iterator.next()).toString());
+
+            String str = queue.poll();
+            if (str.equals("+")) {
+                stack.push(stack.pop() + Double.parseDouble(queue.poll()));
+                continue;
             }
+            if (str.equals("-")) {
+                stack.push(stack.pop() - Double.parseDouble(queue.poll()));
+                continue;
+            }
+            stack.push(Double.parseDouble(str));
         }
-        return result+"";
+
+        return String.valueOf(stack.pop());
     }
 }

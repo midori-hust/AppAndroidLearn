@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void initWidget() {
         edtNumberOperation = (EditText) findViewById(R.id.edt_operation);
-        tvResult =(TextView) findViewById(R.id.tv_result);
+        tvResult = (TextView) findViewById(R.id.tv_result);
 
         btnNumber0 = (Button) findViewById(R.id.btn_number0);
         btnNumber1 = (Button) findViewById(R.id.btn_number1);
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                after_clear = after_clear.substring(0,after_clear.length()-1);
 //                edtNumberOperation.setText(after_clear);
                 BaseInputConnection textFieldConnection = new BaseInputConnection(edtNumberOperation, true);
-                textFieldConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DEL));
+                textFieldConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
                 break;
             case R.id.btn_all_clear:
                 edtNumberOperation.setText("");
@@ -186,10 +186,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_result:
                 String mathExpression = edtNumberOperation.getText().toString();
                 CalculatorController handleOperation = new CalculatorController();
-                if(handleOperation.invalidStringMathExpression(mathExpression)){
+                if (handleOperation.invalidStringMathExpression(mathExpression)) {
                     tvResult.setText(handleOperation.getResult());
-                }else {
-
+                } else {
+                    // TODO: Toast here
                 }
                 break;
             default:
@@ -197,17 +197,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    //TODO string to number ?
-    //String to number + operation(+,-,*,/) to stack
-    //12 * 13 + 14 - 16
-
-
-
-    //a1:12|*|13|+|14|-|16
-
-    //a2:156|+|14|-|16
-
-    //String to number + operation(+,-) to stack
 
     private void initRelativeLayout() {
         //RelativeLayout Root
