@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cb_hobby_3 = (CheckBox) findViewById(R.id.cb_hobby_3);
         cb_hobby_4 = (CheckBox) findViewById(R.id.cb_hobby_4);
 
-        img_btn_submit = (ImageButton)findViewById(R.id.img_btn_submit);
+        img_btn_submit = (ImageButton) findViewById (R.id.img_btn_submit);
     }
 
     @Override
