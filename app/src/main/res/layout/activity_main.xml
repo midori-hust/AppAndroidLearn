@@ -2,35 +2,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp">
 
     <LinearLayout
-        android:weightSum="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-        <EditText
-            android:hint="A"
-            android:inputType="number"
-            android:id="@+id/edta"
-            android:layout_weight="0.5"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:hint="B"
-            android:inputType="number"
-            android:id="@+id/edtb"
-            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:text="@string/profile"
+            android:textSize="30px"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gender"
+            android:textSize="25px" />
+
+        <RadioGroup
+            android:id="@+id/gender"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/r_btn_gender_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/gender_male" />
+
+            <RadioButton
+                android:id="@+id/r_btn_gender_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/font_size"
+                android:text="@string/gender_female" />
+        </RadioGroup>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_result"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/aaddb" />
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hobby"
+            android:textSize="25px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/cb_hobby_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hobby_1" />
+
+            <CheckBox
+                android:id="@+id/cb_hobby_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hobby_2" />
+
+            <CheckBox
+                android:id="@+id/cb_hobby_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hobby_3" />
+
+            <CheckBox
+                android:id="@+id/cb_hobby_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hobby_4" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/img_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher" />
 </LinearLayout>

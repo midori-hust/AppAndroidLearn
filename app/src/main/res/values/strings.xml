@@ -16,4 +16,15 @@
 
     <string name="aaddb">A Add B</string>
 
+    <string name="profile">Profile </string>
+    <string name="gender"> Gender </string>
+    <string name="gender_male"> Male </string>
+    <string name="gender_female"> Female </string>
+
+    <string name="hobby"> Hobby </string>
+    <string name="hobby_1"> Make cooking </string>
+    <string name="hobby_2">Reading book </string>
+    <string name="hobby_3">Learn DJ </string>
+    <string name="hobby_4">Painting </string>
+
 </resources>
