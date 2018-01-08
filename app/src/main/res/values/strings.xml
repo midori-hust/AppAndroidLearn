@@ -27,4 +27,7 @@
     <string name="hobby_3">Learn DJ </string>
     <string name="hobby_4">Painting </string>
 
+    <string name="date_picker">Date Picker </string>
+    <string name="time_picker">Time Picker </string>
+
 </resources>
