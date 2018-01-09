@@ -30,4 +30,10 @@
     <string name="date_picker">Date Picker </string>
     <string name="time_picker">Time Picker </string>
 
+    <string name="show_dialog">Show Dialog </string>
+    <string name="show_alert_dialog">Show Alert Dialog! </string>
+    <string name="dialog_content">Do you want logout?</string>
+    <string name="yes">Yes </string>
+    <string name="no">No </string>
+
 </resources>

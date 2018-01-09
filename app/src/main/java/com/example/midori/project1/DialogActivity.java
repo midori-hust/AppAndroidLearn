@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
  * Created by midori on 2017/12/15.
  */
 
-public class DialogActivity extends Activity{
+public class  DialogActivity extends Activity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
