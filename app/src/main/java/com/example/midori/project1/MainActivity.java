@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -40,78 +41,17 @@ import java.util.List;
 import static android.icu.util.Calendar.getInstance;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btn_show_dialog;
-    private Button btn_show_alert_dialog;
-    private Dialog dialog;
+    private ListView listview;
+    private String[] number = {"992626262662","22222222222","24825488235482","6234862384682","632874683262"};
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dialog);
-        btn_show_dialog =(Button) findViewById(R.id.btn_show_dialog);
-        btn_show_alert_dialog =(Button) findViewById(R.id.btn_show_alert_dialog);
-        btn_show_dialog.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
-        btn_show_alert_dialog.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAlertDialog();
-            }
-        });
-
+        setContentView(R.layout.activity_listview);
+        listview = (ListView) findViewById(R.id.list_item);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,number);
+        listview.setAdapter(arrayAdapter);
     }
-
-    private void showAlertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Phan Thao");
-        builder.setMessage(R.string.dialog_content);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Logout success", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-
-    private void showDialog(){
-        dialog = new Dialog(MainActivity.this);
-
-        dialog.setTitle("Thao Khau!");
-        dialog.setContentView(R.layout.activity_layout_diglog);
-        dialog.setCancelable(false);
-        Button btn_yes = (Button) dialog.findViewById(R.id.btn_yes);
-        Button btn_no = (Button) dialog.findViewById(R.id.btn_no);
-
-        btn_yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this, "Logout success!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_no.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
 
 }
