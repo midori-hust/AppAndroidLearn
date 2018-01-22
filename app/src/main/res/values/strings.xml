@@ -36,4 +36,8 @@
     <string name="yes">Yes </string>
     <string name="no">No </string>
 
+    <string name="send_data">Send Data </string>
+    <string name="input_username">Input User Name </string>
+    <string name="input_password">Input Password </string>
+    <string name="result"> Result Success </string>
 </resources>
