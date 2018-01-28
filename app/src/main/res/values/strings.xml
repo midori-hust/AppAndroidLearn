@@ -40,4 +40,10 @@
     <string name="input_username">Input User Name </string>
     <string name="input_password">Input Password </string>
     <string name="result"> Change Activity Success </string>
+
+    <string name="send_data_receive_resutl">Test send Data receive Data </string>
+    <string name="input_number_a">Input number A</string>
+    <string name="input_number_b">Input number B</string>
+    <string name="btn_result"> Result </string>
+
 </resources>
